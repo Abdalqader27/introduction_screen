@@ -200,8 +200,7 @@ class IntroductionScreen extends StatefulWidget {
     this.rtl = false,
   })  : assert(pages != null || rawPages != null),
         assert(
-          (pages != null && pages.length > 0) ||
-              (rawPages != null && rawPages.length > 0),
+          (pages != null && pages.length > 0) || (rawPages != null && rawPages.length > 0),
           "You provide at least one page on introduction screen !",
         ),
         assert(!showDoneButton || (done != null && onDone != null)),
@@ -278,9 +277,7 @@ class IntroductionScreenState extends State<IntroductionScreen> {
   }
 
   Widget _toggleBtn(Widget btn, bool isShow) {
-    return isShow
-        ? btn
-        : Opacity(opacity: 0.0, child: IgnorePointer(child: btn));
+    return isShow ? btn : Opacity(opacity: 0.0, child: IgnorePointer(child: btn));
   }
 
   @override
@@ -318,9 +315,7 @@ class IntroductionScreenState extends State<IntroductionScreen> {
                 scrollDirection: widget.pagesAxis,
                 controller: _pageController,
                 onPageChanged: widget.onChange,
-                physics: widget.freeze
-                    ? const NeverScrollableScrollPhysics()
-                    : widget.scrollPhysics,
+                physics: widget.freeze ? const NeverScrollableScrollPhysics() : widget.scrollPhysics,
                 children: widget.pages != null
                     ? widget.pages!
                         .map((p) => IntroPage(

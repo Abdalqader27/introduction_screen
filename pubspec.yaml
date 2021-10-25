@@ -1,7 +1,7 @@
 name: introduction_screen
 description: Introduction/Onboarding package for flutter app with some customizations possibilities
 version: 2.1.0
-homepage: https://github.com/pyozer/introduction_screen
+homepage: https://github.com/Abdalqader27/introduction_screen
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
@@ -9,5 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  freezed: any
+  build_runner: ^2.1.4
+  flutter_bloc: ^7.3.1
+  get_storage:
   dots_indicator: ^2.0.0
