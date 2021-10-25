@@ -13,17 +13,24 @@ import 'config/on_boarding_config.dart';
 class IntroductionBuilder extends StatelessWidget {
   final Widget widget;
   final OnBoardingConfig boardingConfig;
+  final Future<void> Function() saveCache;
+  final Future<bool> Function() loadCached;
 
   const IntroductionBuilder({
     Key? key,
     required this.widget,
     required this.boardingConfig,
+    required this.saveCache,
+    required this.loadCached,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => OnBoardingBloc()..add(OnBoardingEvent.checkStatus()),
+      create: (context) => OnBoardingBloc(
+        loadCached: loadCached,
+        saveCache: saveCache,
+      )..add(OnBoardingEvent.checkStatus()),
       child: BlocBuilder<OnBoardingBloc, OnBoardingState>(
         builder: (context, state) {
           return state.when(

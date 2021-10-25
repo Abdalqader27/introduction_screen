@@ -9,6 +9,21 @@ void main() async {
 }
 
 class App extends StatelessWidget {
+  static const String check = 'checkOnBoarding';
+
+  bool getCached() {
+    final box = GetStorage();
+    final status = box.read(check) ?? true;
+    debugPrint("$status");
+    return status;
+  }
+
+  Future<void> saveCached() async {
+    debugPrint("setCache");
+    final box = GetStorage();
+    box.write(check, false);
+  }
+
   Widget _buildFullscrenImage() {
     return Image.asset(
       'assets/fullscreen.jpg',
@@ -151,6 +166,8 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),
       home: IntroductionBuilder(
+        loadCached: () async => getCached(),
+        saveCache: saveCached,
         boardingConfig: _config,
         widget: Scaffold(),
       ),

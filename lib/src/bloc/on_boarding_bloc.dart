@@ -1,14 +1,14 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
-import 'package:get_storage/get_storage.dart';
 
 import 'on_boarding_event.dart';
 import 'on_boarding_state.dart';
 
 class OnBoardingBloc extends Bloc<OnBoardingEvent, OnBoardingState> {
-  static const String check = 'checkOnBoarding';
+  final Future<void> Function() saveCache;
+  final Future<bool> Function() loadCached;
 
-  OnBoardingBloc() : super(const OnBoardingState.loading()) {
+  OnBoardingBloc({required this.saveCache, required this.loadCached}) : super(const OnBoardingState.loading()) {
     on<OnBoardingEvent>((event, emit) {
       event.when(
         checkStatus: () async {
@@ -37,15 +37,10 @@ class OnBoardingBloc extends Bloc<OnBoardingEvent, OnBoardingState> {
   }
 
   Future<bool> getCacheOnBoarding() async {
-    final box = GetStorage();
-    final status = box.read(check) ?? true;
-    debugPrint("$status");
-    return status;
+    return loadCached();
   }
 
   Future<void> setCacheOnBoarding() async {
-    debugPrint("setCache");
-    final box = GetStorage();
-    box.write(check, false);
+    return saveCache();
   }
 }
