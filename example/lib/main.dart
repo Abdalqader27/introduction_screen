@@ -139,7 +139,6 @@ class App extends StatelessWidget {
       ),
     ];
     final dotContainerDecoration = const ShapeDecoration(
-      color: Colors.black87,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8.0))),
     );
 
